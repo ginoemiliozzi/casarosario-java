@@ -23,8 +23,8 @@
 
     <nav class="navbar navbar-light bg-light static-top">
       <div class="container">
-        <a class="navbar-brand" href="index.jsp">Casa Rosario</a>
- <%
+  <a class="navbar-brand" href="index.jsp"><img alt="Casa Rosario" src="img/logo.png"></a>
+   <%
  boolean userLogueado;
  if(request.getSession().getAttribute("currentUser")==null){//No hay nigun usuario logeado
 	userLogueado =false;
