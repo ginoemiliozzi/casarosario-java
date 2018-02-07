@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@page import="Entidades.Piso"%>
+<%@page import="java.util.ArrayList"%>
+    
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -48,5 +52,27 @@
 	<h1>
 		Busco piso
 	</h1>
+	 <div id="page-content-wrapper">
+            <div class="container-fluid">
+            <% ArrayList<Piso> misPisos = (ArrayList) request.getAttribute("pisos");
+            for(Piso p: misPisos){
+            	if(p.getEstado().equals("libre")){
+            	%>
+			<div class="card card-custom hvr-grow">
+			  <div class="card-body">
+			  	<h5><%=p.getZona() %></h5>
+			  	<h6>Dirección: <%= p.getDireccion() %></h6>
+			  	<h6><%= p.getHabitaciones() %> Habitaciones</h6>
+			  	<h6><%=p.getBaños() %> Baños</h6>
+			  	<form action="Comprar" method="post">
+				<input type="hidden" name="id" value="<%=p.getId()%>">
+				<input type="hidden" name="usuario" value="<%=request.getSession().getAttribute("currentUser")%>">
+				
+			  	<button type="Submit" class="btn-primary">Comprar!</button>
+			  	</form>
+			</div>
+		<%}}%>
+            </div>
+	</div>
 </body>
 </html>

@@ -35,7 +35,7 @@ public class BaseDatos {
 		public static ArrayList<Piso> traeMisPisos(String user) throws SQLException{
 			ArrayList<Piso> misPisos = new ArrayList<Piso>();
 			Connection con= getDBConnection();
-			String sql = "select Pisos.usuario, Pisos.venta, Pisos.alquiler, Pisos.baños, Pisos.habitaciones, Pisos.precio_venta, Pisos.precio_alquiler, Pisos.permite_mascota, Pisos.aire_acondicionado, Pisos.amueblado, Pisos.piscina, Pisos.ascensor, Zonas.nombre "
+			String sql = "select Pisos.usuario, Pisos.venta, Pisos.alquiler, Pisos.baï¿½os, Pisos.habitaciones, Pisos.precio_venta, Pisos.precio_alquiler, Pisos.permite_mascota, Pisos.aire_acondicionado, Pisos.amueblado, Pisos.piscina, Pisos.ascensor, Zonas.nombre "
 					+"from Pisos inner join Zonas on Pisos.id_zona = Zonas.id where usuario='"+user+"' ";
 			PreparedStatement ps = con.prepareStatement(sql);			
 			ResultSet rs = ps.executeQuery();	
@@ -52,6 +52,27 @@ public class BaseDatos {
 			return misPisos;
 		}
 		
+		public static boolean cambiaDueÃ±o(String id_casa,String usuario) {
+			Connection con  = getDBConnection();
+			boolean ok;
+			String sql = "UPDATE XXX SET Pisos.propietario = ? where Pisos.id = ?";
+			PreparedStatement ps=null;
+			try {
+				ps = con.prepareStatement(sql);
+				ps.setString(0, usuario);
+				ps.setString(1, id_casa);
+				ps.executeUpdate();
+				ok=true;
+			} catch (SQLException e) {
+				e.printStackTrace();
+				ok= false;
+			}
+			finally {
+				if(ps!=null)try {ps.close();} catch (SQLException e) {e.printStackTrace();}
+				if(con!=null)try {con.close();} catch (SQLException e) {e.printStackTrace();}
+			}
+			return ok;
+		}
 		
 		private static Connection getDBConnection() {
 
