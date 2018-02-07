@@ -62,8 +62,27 @@ public class Section extends HttpServlet {
 		p1.setGimnasio(true);
 		p1.setPrecio_alquiler(5500);
 		p1.setPrecio_venta(600000);
-				
-		pisos.add(p1);
+
+		pisos.add(p1);		
+	
+		Piso p2 = new Piso();
+		p2.setId(1);
+		p2.setEstado("libre");
+		p2.setZona("Zona Centro");
+		p2.setDireccion("Zeballos 123");
+		p2.setPropietario("Juan Perez");
+		p2.setBaños(1);
+		p2.setHabitaciones(2);
+		p2.setPermite_mascotas(true);
+		p2.setAire_acondicionado(true);
+		p2.setAmueblado(true);
+		p2.setPiscina(true);
+		p2.setAscensor(true);
+		p2.setGimnasio(true);
+		p2.setPrecio_alquiler(7000);
+		p2.setPrecio_venta(850000);
+
+		pisos.add(p2);
 		
 		return pisos;
 		

@@ -118,10 +118,16 @@
 			<div class="card card-custom hvr-grow">
 			  <div class="card-body">
 			  	<h5>Zona: <%=p.getZona() %></h5>
-			  	<h6><%= p.getVenta() ? "A la venta" : "" %></h6>
-			  	<h6><%= p.getVenta() ? "$"+p.getPrecioVenta() : "" %></h6>
-			  	<h6><%= p.getAlquiler() ? "Se alquila" : "" %></h6>
-			  	<h6><%= p.getAlquiler() ? "$"+p.getPrecioAlquiler() : "" %></h6>
+		
+			  	<h6>
+						Dirección:
+						<%=p.getDireccion()%></h6>
+					<h6><%=p.getHabitaciones()%>
+						Habitaciones
+					</h6>
+					<h6><%=p.getBaños()%>
+						Baños
+					</h6>
 			  </div>
 			</div>
 		<%}%>
