@@ -37,12 +37,12 @@
 	 
 	 if(request.getAttribute("errorLogin")!=null){
 		%>
-		<div class="alert alert-danger">Usuario o contraseña incorrectos</div>
+		<div class="alert alert-danger">Usuario o contrasena incorrectos</div>
 	<%}%>
 	
 	<form action="Login?sec=2" method="post">
 	Usuario <input type="text" name="user">
-	Contraseña <input type="password" name="password">
+	Contrasena <input type="password" name="password">
 	<button type="submit" name="loguear" class="btn btn-primary">Ingresar</button>
 	</form>
 	
@@ -101,12 +101,13 @@
         <div id="page-content-wrapper">
             <div class="container-fluid">
           <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Menú</a>
-    <%	 ArrayList<Piso> misPisos=new ArrayList<Piso>();
-	    		 try{
-	    			 misPisos = BaseDatos.traeMisPisos((String)request.getSession().getAttribute("currentUser"));
-	    		 }catch(SQLException e){
-	    			 e.printStackTrace();	    			 
-	    		 }
+    <%	 
+	if(request.getAttribute("error")!=null){
+		//HAY ERROR HACER ALGO
+		//request.getRequestDispatcher("index.jsp");
+	}   
+    ArrayList<Piso> misPisos = (ArrayList) request.getAttribute("mispisos"); 	   			    			 
+	    		 
 	    		
 	     %>
 	     	<h1 class="text-center sec-titl">Mis inmuebles</h1>
@@ -125,7 +126,7 @@
 					<h6><%=p.getHabitaciones()%>
 						Habitaciones
 					</h6>
-					<h6><%=p.getBaños()%>
+					<h6><%=p.getBanos()%>
 						Baños
 					</h6>
 			  </div>

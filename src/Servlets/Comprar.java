@@ -27,10 +27,10 @@ public class Comprar extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String id = request.getParameter("id");
+		int id = Integer.parseInt(request.getParameter("id"));
 		String usuario = request.getParameter("usuario");
 		
-		if(BaseDatos.cambiaDueño(id, usuario)){
+		if(BaseDatos.cambiaDueno(id, usuario)){
 			//todo ok
 		}else {
 			//error

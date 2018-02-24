@@ -7,7 +7,7 @@ public class Piso {
 	public String zona;
 	public String direccion;
 	public String propietario;
-	public int baños;
+	public int banos;
 	public int habitaciones;
 	public boolean permite_mascotas;
 	public boolean aire_acondicionado;
@@ -18,7 +18,7 @@ public class Piso {
 	public float precio_alquiler; //mensual
 	public float precio_venta;
 	
-	public Piso(int id, String estado, String zona, String direccion, String propietario, int baños, int habitaciones,
+	public Piso(int id, String estado, String zona, String direccion, String propietario, int banos, int habitaciones,
 			boolean permite_mascotas, boolean aire_acondicionado, boolean amueblado, boolean piscina, boolean ascensor,
 			boolean gimnasio, float precio_alquiler, float precio_venta) {
 		this.id = id;
@@ -26,7 +26,7 @@ public class Piso {
 		this.zona = zona;
 		this.direccion = direccion;
 		this.propietario = propietario;
-		this.baños = baños;
+		this.banos = banos;
 		this.habitaciones = habitaciones;
 		this.permite_mascotas = permite_mascotas;
 		this.aire_acondicionado = aire_acondicionado;
@@ -82,12 +82,12 @@ public class Piso {
 		this.propietario = propietario;
 	}
 
-	public int getBaños() {
-		return baños;
+	public int getBanos() {
+		return banos;
 	}
 
-	public void setBaños(int baños) {
-		this.baños = baños;
+	public void setBanos(int banos) {
+		this.banos = banos;
 	}
 
 	public int getHabitaciones() {

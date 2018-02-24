@@ -78,7 +78,7 @@
 					<h5 style="color:green">Precio Venta: $<%=p.getPrecio_venta() %></h6>
 					<h6>Dirección:	<%=p.getDireccion()%></h6>
 					<h6><%=p.getHabitaciones()%> Habitaciones</h6>
-					<h6><%=p.getBaños()%> Baños</h6>
+					<h6><%=p.getBanos()%> Baños</h6>
 					<button class="info" onclick="document.getElementById('id01').style.display='block'"
 class="w3-button">Ver Detalles</button>
 
@@ -93,7 +93,7 @@ class="w3-button">Ver Detalles</button>
 					      <h2><%=p.getDireccion()%></h2>
 					      <h3><%=p.getZona() %></h3>
 					      <h3><%=p.getHabitaciones()%> Habitaciones</h3>
-						  <h3><%=p.getBaños()%> Baños</h3>
+						  <h3><%=p.getBanos()%> Baños</h3>
 						  <%if(p.isPermite_mascotas()){
 							  %>
 							 <p> <i class="fas fa-paw"></i> Permite Mascotas
