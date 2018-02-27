@@ -17,10 +17,12 @@ public class Piso {
 	public boolean gimnasio;
 	public float precio_alquiler; //mensual
 	public float precio_venta;
+	public String img_url;
+	
 	
 	public Piso(int id, String estado, String zona, String direccion, String propietario, int banos, int habitaciones,
 			boolean permite_mascotas, boolean aire_acondicionado, boolean amueblado, boolean piscina, boolean ascensor,
-			boolean gimnasio, float precio_alquiler, float precio_venta) {
+			boolean gimnasio, float precio_alquiler, float precio_venta,String img_url) {
 		this.id = id;
 		this.estado = estado;
 		this.zona = zona;
@@ -36,10 +38,12 @@ public class Piso {
 		this.gimnasio = gimnasio;
 		this.precio_alquiler = precio_alquiler;
 		this.precio_venta = precio_venta;
+		this.img_url = img_url;
 	}
 	
 	public Piso() {
 	}
+	
 
 	public int getId() {
 		return id;
@@ -160,6 +164,14 @@ public class Piso {
 
 	public void setPrecio_venta(float precio_venta) {
 		this.precio_venta = precio_venta;
+	}
+
+	public String getImg_url() {
+		return img_url;
+	}
+
+	public void setImg_url(String img_url) {
+		this.img_url = img_url;
 	}
 	
 	

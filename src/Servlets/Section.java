@@ -28,6 +28,12 @@ public class Section extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int sec = Integer.parseInt(request.getParameter("sec"));
+		
+		//Por si viene desde login
+		if(request.getAttribute("errorLogin")!=null) {
+			request.setAttribute("errorLogin", true);
+		}
+		
 		switch(sec){
 		
 			case 1: 

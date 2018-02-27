@@ -118,6 +118,7 @@
 		for(Piso p: misPisos){%>
 			<div class="card card-custom hvr-grow">
 			  <div class="card-body">
+			  <div style="float:left">
 			  	<h5>Zona: <%=p.getZona() %></h5>
 		
 			  	<h6>
@@ -129,6 +130,10 @@
 					<h6><%=p.getBanos()%>
 						Baños
 					</h6>
+			  </div>
+			  <div style="float:right; padding: 20px;">
+			  <img width=250 src="img/deptos/<%=p.getImg_url()%>">
+			  </div>
 			  </div>
 			</div>
 		<%}%>

@@ -68,11 +68,12 @@
 			<%
 				ArrayList<Piso> misPisos = (ArrayList) request.getAttribute("pisos");
 				for (Piso p : misPisos) {
-					if (p.getEstado().equals("libre")) {
+					if (p.getEstado().equals("Libre")) {
+						//Esto lo podemos hacer en el SQL directamente, lo dejo aca por si lo queremos cambiar 
 			%>
 			<div class="card card-custom hvr-grow col-md-3">
 				<div class="card-body">
-					<img alt="Foto" src="img/deptos/depto1.jpg" height="120">
+					<img alt="Foto" src="img/deptos/<%=p.getImg_url()%>" height="120">
 				
 					<h5><%=p.getZona()%></h5>
 					<h5 style="color:green">Precio Venta: $<%=p.getPrecio_venta() %></h6>
@@ -88,7 +89,7 @@ class="w3-button">Ver Detalles</button>
 					    <div class="w3-container">
 					      <span onclick="document.getElementById('id01').style.display='none'" 
 					      class="w3-button w3-display-topright">&times;</span>
-					      	<img style="padding-top: 10px" ="Foto" src="img/deptos/depto1.jpg" height="480">
+					      	<img style="padding-top: 10px" ="Foto" src="img/deptos/<%=p.getImg_url()%>" height="480">
 					      
 					      <h2><%=p.getDireccion()%></h2>
 					      <h3><%=p.getZona() %></h3>

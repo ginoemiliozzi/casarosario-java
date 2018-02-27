@@ -48,21 +48,23 @@ public class Login extends HttpServlet {
 			
 			if(request.getParameter("sec")!=null){
 				
-				switch(Integer.parseInt(request.getParameter("sec"))){
-				
-				case 1: 
-					request.setAttribute("pisos", BaseDatos.buscoPiso());	
-					request.getRequestDispatcher("WEB-INF/buscopiso.jsp").forward(request, response);;
-					break;
-				case 2: 
-					try {
-						request.setAttribute("mispisos", BaseDatos.traeMisPisos((String)request.getSession().getAttribute("currentUser")));
-						} catch (SQLException e) {	
-							request.setAttribute("error", "1");
-							e.printStackTrace(); }
-					request.getRequestDispatcher("WEB-INF/alquilaovende.jsp").forward(request, response);;
-					break;
-				}
+				request.getRequestDispatcher("Section?sec="+request.getParameter("sec")).forward(request, response);;
+//
+//				switch(Integer.parseInt(request.getParameter("sec"))){
+//				
+//				case 1: 
+//					request.setAttribute("pisos", BaseDatos.buscoPiso());	
+//					request.getRequestDispatcher("WEB-INF/buscopiso.jsp").forward(request, response);;
+//					break;
+//				case 2: 
+//					try {
+//						request.setAttribute("mispisos", BaseDatos.traeMisPisos((String)request.getSession().getAttribute("currentUser")));
+//						} catch (SQLException e) {	
+//							request.setAttribute("error", "1");
+//							e.printStackTrace(); }
+//					request.getRequestDispatcher("WEB-INF/alquilaovende.jsp").forward(request, response);;
+//					break;
+//				}
 			}else{
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 				
