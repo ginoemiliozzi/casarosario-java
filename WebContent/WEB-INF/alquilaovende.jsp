@@ -72,25 +72,13 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#">Dashboard</a>
+                    <a href="Section?sec=2">Mis pisos</a>
                 </li>
                 <li>
-                    <a href="#">Shortcuts</a>
+                    <a href="Section?sec=3">Notificaciones</a>
                 </li>
                 <li>
-                    <a href="#">Overview</a>
-                </li>
-                <li>
-                    <a href="#">Events</a>
-                </li>
-                <li>
-                    <a href="#">About</a>
-                </li>
-                <li>
-                    <a href="#">Services</a>
-                </li>
-                <li>
-                    <a href="#">Contact</a>
+                    <a href="Section?sec=1">Busco Piso</a>
                 </li>
             </ul>
         </div>
@@ -101,11 +89,7 @@
         <div id="page-content-wrapper">
             <div class="container-fluid">
           <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Menú</a>
-    <%	 
-	if(request.getAttribute("error")!=null){
-		//HAY ERROR HACER ALGO
-		//request.getRequestDispatcher("index.jsp");
-	}   
+    <%	   
     ArrayList<Piso> misPisos = (ArrayList) request.getAttribute("mispisos"); 	   			    			 
 	    		 
 	    		

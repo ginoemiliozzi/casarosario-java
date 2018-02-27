@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="Entidades.*"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -42,7 +44,10 @@
 	
 	<% } else { userLogueado =true; //Esta logeado un usuario%>
 
-	<h5>Bienvenido <%=request.getSession().getAttribute("currentUser")%> </h5>
+	<h5>Bienvenido <%=request.getSession().getAttribute("currentUser")%>  </h5>
+	<%if(request.getSession().getAttribute("misnotif")!=null){
+		ArrayList<Transaccion> misnotif = (ArrayList<Transaccion>)request.getSession().getAttribute("misnotif"); 
+		%><h5><%=misnotif.size() %></h5><%} %>
 	<a href="Logout" class="btn btn-danger">Cerrar sesión</a>
 	<% }%>
       </div>

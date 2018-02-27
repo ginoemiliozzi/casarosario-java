@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Entidades.Piso;
+import Entidades.Transaccion;
 
 public class BaseDatos {
 		
@@ -80,8 +81,8 @@ public class BaseDatos {
 			PreparedStatement ps=null;
 			try {
 				ps = con.prepareStatement(sql);
-				ps.setString(0, usuario);
-				ps.setInt(1, id_casa);
+				ps.setString(1, usuario);
+				ps.setInt(2, id_casa);
 				ps.executeUpdate();
 				ok=true;
 			} catch (SQLException e) {
@@ -104,7 +105,7 @@ public class BaseDatos {
 						+ " inner join Zonas "
 						+ "		on Pisos.zona = Zonas.id "
 						+ "inner join Estados "
-						+ "		on Pisos.estado = Estados.id ";
+						+ "		on Pisos.estado = Estados.id where Pisos.estado=1 ";
 			ResultSet rs=null;
 			PreparedStatement ps=null;
 			try {
@@ -169,5 +170,23 @@ public class BaseDatos {
 
 			return dbConnection;
 
+		}
+
+		public static ArrayList<Transaccion> verNotificaciones(String user) throws SQLException {
+			ArrayList<Transaccion> transacciones = new ArrayList<Transaccion>();
+			
+			String sql = "select * from Transacciones t where t.receptor=? ";
+			
+			Connection con = getDBConnection();
+			PreparedStatement ps= con.prepareStatement(sql);
+			ps.setString(1, user);
+			ResultSet rs = ps.executeQuery();
+			Transaccion t;
+			while(rs.next()) {
+				t = new Transaccion(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getDate(4),rs.getString(5),rs.getInt(6),rs.getString(7));
+				transacciones.add(t);
+			}
+					
+			return transacciones;
 		}
 }

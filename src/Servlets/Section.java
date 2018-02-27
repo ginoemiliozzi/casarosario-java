@@ -35,18 +35,24 @@ public class Section extends HttpServlet {
 		}
 		
 		switch(sec){
-		
+		//Deberiamos hacer un try para todos los case y cuando hay error lo mandamos a index con algun mensaje
 			case 1: 
 				request.setAttribute("pisos", BaseDatos.buscoPiso());		//Carga los pisos como atributo
 				request.getRequestDispatcher("WEB-INF/buscopiso.jsp").forward(request, response);;
 				break;
 			case 2: 
+			Boolean error=false;
 			try {
+				error = false;
 				request.setAttribute("mispisos", BaseDatos.traeMisPisos((String)request.getSession().getAttribute("currentUser")));
 				} catch (SQLException e) {	
 					request.setAttribute("error", "1");
+					error=true;
+					request.getRequestDispatcher("index.jsp").forward(request, response);
 					e.printStackTrace(); }
-				request.getRequestDispatcher("WEB-INF/alquilaovende.jsp").forward(request, response);;
+			if(!error) {
+				request.getRequestDispatcher("WEB-INF/alquilaovende.jsp").forward(request, response);	
+			}
 				break;
 		}
 	}

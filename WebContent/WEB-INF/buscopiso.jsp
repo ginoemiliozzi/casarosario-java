@@ -68,8 +68,7 @@
 			<%
 				ArrayList<Piso> misPisos = (ArrayList) request.getAttribute("pisos");
 				for (Piso p : misPisos) {
-					if (p.getEstado().equals("Libre")) {
-						//Esto lo podemos hacer en el SQL directamente, lo dejo aca por si lo queremos cambiar 
+					
 			%>
 			<div class="card card-custom hvr-grow col-md-3">
 				<div class="card-body">
@@ -80,14 +79,14 @@
 					<h6>Dirección:	<%=p.getDireccion()%></h6>
 					<h6><%=p.getHabitaciones()%> Habitaciones</h6>
 					<h6><%=p.getBanos()%> Baños</h6>
-					<button class="info" onclick="document.getElementById('id01').style.display='block'"
+					<button class="info" onclick="document.getElementById('<%=p.getId() %>').style.display='block'"
 class="w3-button">Ver Detalles</button>
 
 					<!-- The Modal -->
-					<div id="id01" class="w3-modal">
+					<div id="<%=p.getId() %>" class="w3-modal">
 					  <div class="w3-modal-content">
 					    <div class="w3-container">
-					      <span onclick="document.getElementById('id01').style.display='none'" 
+					      <span onclick="document.getElementById('<%=p.getId() %>').style.display='none'" 
 					      class="w3-button w3-display-topright">&times;</span>
 					      	<img style="padding-top: 10px" ="Foto" src="img/deptos/<%=p.getImg_url()%>" height="480">
 					      
@@ -146,7 +145,7 @@ class="w3-button">Ver Detalles</button>
 					</form>
 				</div>
 			</div>
-				<%}
+				<%
 				}%>
 		</div>
 </body>

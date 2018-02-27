@@ -2,6 +2,7 @@ package Servlets;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import Entidades.Transaccion;
 import Utils.BaseDatos;
 
 
@@ -19,7 +21,6 @@ public class Login extends HttpServlet {
 
     public Login() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 
@@ -39,8 +40,10 @@ public class Login extends HttpServlet {
 				
 				request.getSession().setAttribute("currentUser", user);
 				request.getSession().setAttribute("currentPass", password);
-				
-				
+				ArrayList<Transaccion> misnotif = BaseDatos.verNotificaciones(user);				
+				if(!misnotif.isEmpty()) {
+					request.getSession().setAttribute("misnotif", misnotif);
+				}
 				
 			}else{
 				request.setAttribute("errorLogin", true);
@@ -49,22 +52,7 @@ public class Login extends HttpServlet {
 			if(request.getParameter("sec")!=null){
 				
 				request.getRequestDispatcher("Section?sec="+request.getParameter("sec")).forward(request, response);;
-//
-//				switch(Integer.parseInt(request.getParameter("sec"))){
-//				
-//				case 1: 
-//					request.setAttribute("pisos", BaseDatos.buscoPiso());	
-//					request.getRequestDispatcher("WEB-INF/buscopiso.jsp").forward(request, response);;
-//					break;
-//				case 2: 
-//					try {
-//						request.setAttribute("mispisos", BaseDatos.traeMisPisos((String)request.getSession().getAttribute("currentUser")));
-//						} catch (SQLException e) {	
-//							request.setAttribute("error", "1");
-//							e.printStackTrace(); }
-//					request.getRequestDispatcher("WEB-INF/alquilaovende.jsp").forward(request, response);;
-//					break;
-//				}
+
 			}else{
 				request.getRequestDispatcher("index.jsp").forward(request, response);
 				
