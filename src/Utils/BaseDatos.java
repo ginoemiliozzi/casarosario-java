@@ -96,7 +96,7 @@ public class BaseDatos {
 			return ok;
 		}
 		
-		public static List<Piso> buscoPiso(){
+		public static List<Piso> buscoPiso() throws SQLException{
 			List<Piso> pisos = new ArrayList<>();
 			
 			Connection con= getDBConnection();
@@ -108,7 +108,7 @@ public class BaseDatos {
 						+ "		on Pisos.estado = Estados.id where Pisos.estado=1 ";
 			ResultSet rs=null;
 			PreparedStatement ps=null;
-			try {
+			
 				ps = con.prepareStatement(sql);			
 				rs = ps.executeQuery();
 			
@@ -133,15 +133,9 @@ public class BaseDatos {
 			 			  rs.getString("img_url"));	
 			pisos.add(p);
 			}
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}finally {
-				//Cierro todo
-				if(rs!=null) {try {rs.close();} catch (SQLException e) {e.printStackTrace();}}
-				if(ps!=null) {try {ps.close();} catch (SQLException e) {e.printStackTrace();}}			
-				try {con.close();} catch (SQLException e) {e.printStackTrace();	}
-				
-			}	
+			rs.close();
+			ps.close();
+			con.close();
 			return pisos;
 			
 		}

@@ -40,7 +40,7 @@
 			if (request.getSession().getAttribute("currentUser") == null) {//No hay nigun usuario logeado
 				userLogueado = false;
 
-				if (request.getAttribute("errorLogin") != null) {
+		if (request.getAttribute("errorLogin") != null) {
 		%>
 		<div class="alert alert-danger">Usuario o contraseña incorrectos</div>
 		<%}	%>
@@ -75,7 +75,7 @@
 					<img alt="Foto" src="img/deptos/<%=p.getImg_url()%>" height="120">
 				
 					<h5><%=p.getZona()%></h5>
-					<h5 style="color:green">Precio Venta: $<%=p.getPrecio_venta() %></h6>
+					<h5 style="color:green">Precio Venta: $<%=p.getPrecio_venta() %></h5>
 					<h6>Dirección:	<%=p.getDireccion()%></h6>
 					<h6><%=p.getHabitaciones()%> Habitaciones</h6>
 					<h6><%=p.getBanos()%> Baños</h6>
@@ -96,44 +96,46 @@ class="w3-button">Ver Detalles</button>
 						  <h3><%=p.getBanos()%> Baños</h3>
 						  <%if(p.isPermite_mascotas()){
 							  %>
-							 <p> <i class="fas fa-paw"></i> Permite Mascotas
+							 <p> <i class="fas fa-paw"></i> Permite Mascotas</p>
 
 						 <%  }%>
 						 <%if(p.isAmueblado()){
 							  %>
-							 <p> <i class="fas fa-truck"></i> Ya Amueblado
+							 <p> <i class="fas fa-truck"></i> Ya Amueblado</p>
 
 						 <%  }%>
 						 <%if(p.isAscensor()){
 							  %>
-							 <p> <i class="fas fa-caret-square-up"></i> Tiene Ascensor
+							 <p> <i class="fas fa-caret-square-up"></i> Tiene Ascensor</p>
 
 						 <%  }%>
 						  <%if(p.isGimnasio()){
 							  %>
-							  <p><i class="fas fa-basketball-ball"></i> Tiene Gimnasio
+							  <p><i class="fas fa-basketball-ball"></i> Tiene Gimnasio</p>
 
 						 <%  }%>
 						 <%if(p.isPiscina()){
 							  %>
-							  <p><i class="fas fa-tint"></i> Tiene Piscina
+							  <p><i class="fas fa-tint"></i> Tiene Piscina</p>
 
 						 <%  }%>
 						 <%if(p.isAire_acondicionado()){
 							  %>
-							  <p><i class="fas fa-snowflake"></i> Tiene Aire Acondicionado
+							  <p><i class="fas fa-snowflake"></i> Tiene Aire Acondicionado</p>
 
 						 <%  }%>
 						 
 						 
-					      <p>
+					 
 					    </div>
 					  </div>
 					</div>
+					
+				
 					<!-- End Modal -->
 					<form action="Comprar" method="post">
-						<input type="hidden" name="id" value="<%=p.getId()%>"> <input
-							type="hidden" name="usuario"
+						<input type="hidden" name="id" value="<%=p.getId()%>"> 
+						<input	type="hidden" name="usuario"
 							value="<%=request.getSession().getAttribute("currentUser")%>">
 						<%if (userLogueado) {%>
 						<button type="Submit" class="btn-primary">Comprar!</button>
@@ -144,6 +146,7 @@ class="w3-button">Ver Detalles</button>
 						<%}%>
 					</form>
 				</div>
+			</div>
 			</div>
 				<%
 				}%>
