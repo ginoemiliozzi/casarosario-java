@@ -4,14 +4,18 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
+
 import Entidades.Transaccion;
 import Utils.BaseDatos;
+import Utils.Encryptor;
 
 
 @WebServlet("/Login")
@@ -32,14 +36,16 @@ public class Login extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String user = request.getParameter("user");
-		String password = request.getParameter("password");
+		String pw = request.getParameter("password");
 		
 		
 		try {
+			String password = Encryptor.encrypt(pw);
 			if(BaseDatos.validaLogueo(user, password)){
 				
 				request.getSession().setAttribute("currentUser", user);
 				request.getSession().setAttribute("currentPass", password);
+				
 				ArrayList<Transaccion> misnotif = BaseDatos.verNotificaciones(user);				
 				if(!misnotif.isEmpty()) {
 					request.getSession().setAttribute("misnotif", misnotif);
