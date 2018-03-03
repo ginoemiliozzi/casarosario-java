@@ -41,7 +41,7 @@ public class Login extends HttpServlet {
 		
 		try {
 			String password = Encryptor.encrypt(pw);
-			if(BaseDatos.validaLogueo(user, password)){
+		if(BaseDatos.validaLogueo(user, password)){
 				
 				request.getSession().setAttribute("currentUser", user);
 				request.getSession().setAttribute("currentPass", password);
@@ -69,8 +69,8 @@ public class Login extends HttpServlet {
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
-			request.setAttribute("errorSQL", true);
-			request.getRequestDispatcher("index.jsp").forward(request, response);
+			request.setAttribute("secError", "0");
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
 		
 	}
