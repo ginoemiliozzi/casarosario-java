@@ -36,11 +36,17 @@
 		<div class="alert alert-danger">Usuario o contraseña incorrectos</div>
 	<%}%>
 	
+	<%if(request.getAttribute("userRegistrado")!=null){
+		%>
+		<div class="alert alert-success">Usuario registrado con éxito!</div>
+	<%}%>
+	
 	<form action="Login" method="post">
 	Usuario <input type="text" name="user">
 	Contraseña <input type="password" name="password">
 	<button type="submit" name="loguear" class="btn btn-primary">Ingresar</button>
 	</form>
+	<a href="registro.jsp"><button name="registrar" class="btn btn-sm btn-primary">Registrarse</button></a>
 	
 	<% } else { userLogueado =true; //Esta logeado un usuario%>
 

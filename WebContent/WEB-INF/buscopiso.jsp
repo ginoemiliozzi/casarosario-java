@@ -50,6 +50,7 @@
 				type="password" name="password">
 			<button type="submit" name="loguear" class="btn btn-primary">Ingresar</button>
 		</form>
+			<a href="registro.jsp"><button name="registrar" class="btn btn-sm btn-primary">Registrarse</button></a>
 
 		<%} else {
 				userLogueado = true; //Esta logeado un usuario %>

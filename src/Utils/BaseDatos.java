@@ -10,6 +10,7 @@ import java.util.List;
 
 import Entidades.Piso;
 import Entidades.Transaccion;
+import Entidades.Usuario;
 
 public class BaseDatos {
 		
@@ -137,6 +138,45 @@ public class BaseDatos {
 			ps.close();
 			con.close();
 			return pisos;
+			
+		}
+			
+		public static Boolean registrarUsuario(Usuario u) throws SQLException {
+			
+			Connection con = getDBConnection();
+			
+			Boolean registrado = true;
+			String sql = "select usuario from Usuarios where usuario='"+u.getUsuario()+"'";
+			
+			PreparedStatement ps = con.prepareStatement(sql);
+			
+			ResultSet rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				registrado=false;
+				rs.close();
+				ps.close();
+				con.close();
+			}else {
+			
+			sql= "insert into Usuarios values ('"+u.getUsuario()+"'"
+					+"								,'"+u.getPassword()+"'"
+					+"								,'"+u.getNombre()+"'"
+					+"								,'"+u.getApellido()+"'"
+					+"								,'"+u.getDni()+"'"
+					+"								,'"+u.getTelefono()+"')";
+			
+			ps = con.prepareStatement(sql);
+			
+			ps.execute();
+			
+			ps.close();
+			rs.close();
+			con.close();
+			registrado=true;
+			}
+			
+			return registrado;
 			
 		}
 
