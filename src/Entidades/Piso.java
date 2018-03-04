@@ -19,7 +19,7 @@ public class Piso {
 	public float precio_venta;
 	public String img_url;
 	
-	
+	//test
 	public Piso(int id, String estado, String zona, String direccion, String propietario, int banos, int habitaciones,
 			boolean permite_mascotas, boolean aire_acondicionado, boolean amueblado, boolean piscina, boolean ascensor,
 			boolean gimnasio, float precio_alquiler, float precio_venta,String img_url) {
