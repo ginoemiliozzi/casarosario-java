@@ -83,6 +83,11 @@ public class Section extends HttpServlet {
 				request.getRequestDispatcher("WEB-INF/alquilaovende.jsp").forward(request, response);	
 			}
 				break;
+		
+		
+			case 100:
+				response.sendRedirect("registro.jsp");			
+				break;
 		}
 	}
 
