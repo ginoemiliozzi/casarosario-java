@@ -141,7 +141,7 @@ public class BaseDatos {
 			
 		}
 			
-		public static Boolean registrarUsuario(Usuario u) throws SQLException {
+		public static Boolean registrarUsuario(Usuario u) throws SQLException, NullPointerException {
 			
 			Connection con = getDBConnection();
 			

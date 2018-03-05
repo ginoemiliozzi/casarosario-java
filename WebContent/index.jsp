@@ -77,7 +77,7 @@
     <section class="features-icons bg-light text-center">
       <div class="container">
         <div class="row">
-          <div class="col-lg-4">
+          <div class="col-lg-6">
             <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
             
             <a href="Section?sec=1">
@@ -90,20 +90,20 @@
               
             </div>
           </div>
-          <div class="col-lg-4">
-            <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">
+<!--           <div class="col-lg-4"> -->
+<!--             <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3"> -->
             
-            <a href="Section?sec=2">
-              <div class="features-icons-icon d-flex">
-                <i class="icon-key m-auto text-primary"></i>
-              </div>              
-              <h3>Quiero alquilar</h3>
-              </a>
-              <p class="lead mb-0">Conseguí al inquilino en poco tiempo!</p>
+<!--             <a href="Section?sec=2"> -->
+<!--               <div class="features-icons-icon d-flex"> -->
+<!--                 <i class="icon-key m-auto text-primary"></i> -->
+<!--               </div>               -->
+<!--               <h3>Quiero alquilar</h3> -->
+<!--               </a> -->
+<!--               <p class="lead mb-0">Conseguí al inquilino en poco tiempo!</p> -->
               
-            </div>
-          </div>
-          <div class="col-lg-4">
+<!--             </div> -->
+<!--           </div> -->
+          <div class="col-lg-6">
             <div class="features-icons-item mx-auto mb-0 mb-lg-3">
             
             <a href="Section?sec=2">

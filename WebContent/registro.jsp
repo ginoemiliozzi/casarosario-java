@@ -51,7 +51,7 @@ function pswderr() {
           <div class="col-md-8 col-sm-9">
               <div class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
-              <input type="text" class="form-control" name="userid" id="userid" placeholder="Ingresa el nombre de usuario" value="">
+              <input type="text" required class="form-control" name="userid" id="userid" placeholder="Ingresa el nombre de usuario" value="">
             </div>
 		 </div>
         </div>
@@ -65,7 +65,7 @@ function pswderr() {
           <div class="col-md-5 col-sm-8">
             <div class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-              <input type="password" class="form-control" name="password" id="password" placeholder="Ingrese una contraseña" value="">
+              <input type="password" required class="form-control" name="password" id="password" placeholder="Ingrese una contraseña" value="">
            </div>   
           </div>
         </div>
@@ -74,7 +74,7 @@ function pswderr() {
           <div class="col-md-5 col-sm-8">
             <div class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-              <input type="password" class="form-control" name="cpassword" id="cpassword" placeholder="Confirme su contraseña" value="">
+              <input type="password" required class="form-control" name="cpassword" id="cpassword" placeholder="Confirme su contraseña" value="">
             </div>  
           </div>
         </div>
@@ -83,31 +83,31 @@ function pswderr() {
         <div class="form-group">
           <label class="control-label col-sm-3">Nombre <span class="text-danger">*</span></label>
           <div class="col-md-8 col-sm-9">
-            <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Ingrese su nombre" value="">
+            <input type="text" required class="form-control" name="nombre" id="nombre" placeholder="Ingrese su nombre" value="">
           </div>
         </div>
         
         <div class="form-group">
           <label class="control-label col-sm-3">Apellido <span class="text-danger">*</span></label>
           <div class="col-md-8 col-sm-9">
-            <input type="text" class="form-control" name="apellido" id="apellido" placeholder="Ingrese su apellido" value="">
+            <input type="text" required class="form-control" name="apellido" id="apellido" placeholder="Ingrese su apellido" value="">
           </div>
         </div>
         
        <div class="form-group">
           <label class="control-label col-sm-3">DNI <span class="text-danger">*</span></label>
           <div class="col-md-8 col-sm-9">
-            <input type="text" class="form-control" name="dni" id="dni" placeholder="Número de documento" value="">
+            <input type="number" required class="form-control" name="dni" id="dni" placeholder="Número de documento" value="">
           </div>
         </div>
 
         
         <div class="form-group">
-          <label class="control-label col-sm-3">Teléfono <span class="text-danger">*</span></label>
+          <label class="control-label col-sm-3">Teléfono <span class="text-danger"></span></label>
           <div class="col-md-5 col-sm-8">
           	<div class="input-group">
               <span class="input-group-addon"><i class="glyphicon glyphicon-phone"></i></span>
-            <input type="text" class="form-control" name="tel" id="tel" placeholder="Número de contacto" value="">
+            <input type="number" class="form-control" name="tel" id="tel" placeholder="Número de contacto" value="">
             </div>
           </div>
         </div>

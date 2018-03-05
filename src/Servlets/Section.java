@@ -80,7 +80,7 @@ public class Section extends HttpServlet {
 			
 			//Si se obtuvieron los datos sin ningun error se redirige al jsp solicitado
 			if(!error) {
-				request.getRequestDispatcher("WEB-INF/alquilaovende.jsp").forward(request, response);	
+				request.getRequestDispatcher("WEB-INF/mispisos.jsp").forward(request, response);	
 			}
 				break;
 		

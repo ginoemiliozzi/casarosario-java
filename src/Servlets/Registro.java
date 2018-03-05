@@ -49,7 +49,7 @@ public class Registro extends HttpServlet {
 			 registrado = BaseDatos.registrarUsuario(u);
 			 error = false;
 			
-		} catch (SQLException e) {
+		} catch (SQLException | NullPointerException e) {
 			
 			request.setAttribute("secError", 100);
 			error=true;

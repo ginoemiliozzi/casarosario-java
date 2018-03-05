@@ -94,29 +94,59 @@
 	    		 
 	    		
 	     %>
-	     	<h1 class="text-center sec-titl">Mis inmuebles</h1>
+	     	<h1 class="text-center">Mis inmuebles
+			<br>
+     		<form action="ABMPisos" style="margin-top: 7px;">
+				<input type="hidden" name="accion" value="alta">
+				<button class="btn btn-success">Agregar nuevo!</button>					
+			</form>
+	     	</h1>
 		<%if(misPisos.isEmpty()){ //No hay inmuebles para mostrar al usuario%>		
 			<p>Actualmente no tiene cargado ningún inmueble.</p>
 		
 		<%} else{//Hay inmuebles para mostrar al usuario
 		for(Piso p: misPisos){%>
 			<div class="card card-custom hvr-grow">
-			  <div class="card-body">
-			  <div style="float:left">
-			  	<h5>Zona: <%=p.getZona() %></h5>
+			  <div class="card-body row">
+			  <div class="col-md-6">
+			  	<h5><%=p.getDireccion()%></h5>
 		
-			  	<h6>
-						Dirección:
-						<%=p.getDireccion()%></h6>
+			  	<h6>Zona: <%=p.getZona() %>	</h6>
 					<h6><%=p.getHabitaciones()%>
 						Habitaciones
 					</h6>
 					<h6><%=p.getBanos()%>
+					<%
+					if(p.getBanos()==1){%>
+						Baño
+				<% 	}else{	%>
 						Baños
+				<%	} %>
 					</h6>
+					<hr>
+					<h4><b><%=p.getPrecio_venta()%></b></h4>
+					<%
+					String estado = p.getEstado();
+					String color;
+					boolean editar = false;
+					if(estado.equals("Libre")){
+						color = "green";
+						editar = true;
+					}else{
+						color = "red";
+					}
+					%>
+					<h6 style="color:<%=color%>"><%=p.getEstado()%>	</h6>
+					<%if(editar){%>
+					<form action="ABMPisos">
+					<input type="hidden" name="id" value="<%=p.getId()%>">
+					<input type="hidden" name="accion" value="modif">
+					<button class="btn btn-primary">Editar inmueble</button>					
+					</form>
+					<%}%>
 			  </div>
-			  <div style="float:right; padding: 20px;">
-			  <img width=250 src="img/deptos/<%=p.getImg_url()%>">
+			  <div class="col-md-6" style="padding: 20px;">
+			  <img src="img/deptos/<%=p.getImg_url()%>">
 			  </div>
 			  </div>
 			</div>
