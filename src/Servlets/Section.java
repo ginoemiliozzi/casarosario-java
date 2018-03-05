@@ -45,8 +45,17 @@ public class Section extends HttpServlet {
 			case 1: 
 			//SECCION BUSCO PISO
 				try {
-					
-					request.setAttribute("pisos", BaseDatos.buscoPiso());
+					String filtro="";
+					if(request.getParameter("min")!=null || request.getParameter("max")!=null) {
+						//Agrego AND porque el WHERE ya esta escrito donde filtro que los pisos esten libres
+						if(!request.getParameter("min").equals("")) {
+							filtro+= " AND precio_venta >= "+request.getParameter("min");
+						}
+						if(!request.getParameter("max").equals("")) {
+							filtro+= " AND precio_venta <= "+request.getParameter("max");
+						}
+					}
+					request.setAttribute("pisos", BaseDatos.buscoPiso(filtro));
 					error = false;
 					
 				} catch (SQLException e1) {

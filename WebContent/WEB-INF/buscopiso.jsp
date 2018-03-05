@@ -31,8 +31,8 @@
 <body>
 	<!-- Navigation -->
 
-	<nav class="navbar navbar-light bg-light static-top">
 	<div class="container">
+	<nav class="navbar navbar-light bg-light static-top">
 		<a class="navbar-brand" href="index.jsp"><img alt="Casa Rosario"
 			src="img/logo.png"></a>
 		<%
@@ -61,9 +61,24 @@
 		</h5>
 		<a href="Logout" class="btn btn-danger">Cerrar sesión</a>
 		<%}	%>
-	</div>
 	</nav>
 	<h1>Busco piso</h1>
+	<form action="Section">
+	<input type="hidden" name="sec" value="1">
+  <div class="form-row">
+  	<div class="col-2">
+	Precio minimo:	<input type="number" class="form-control" name="min"><br>
+  	</div>
+  	<div class="col-2">
+	Precio maximo: <input type="number" class="form-control" name="max">
+  	</div>
+  	<div class="col-4 offset-3">
+		<button type="submit" class="btn btn-lg btn-primary">Filtrar</button>
+  	</div>
+	
+
+	</div>
+	</form>
 	<div id="page-content-wrapper">
 		<div class="row container-fluid">
 			<%
@@ -152,5 +167,6 @@ class="w3-button">Ver Detalles</button>
 				<%
 				}%>
 		</div>
+	</div>
 </body>
 </html>

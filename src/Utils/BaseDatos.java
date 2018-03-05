@@ -97,7 +97,7 @@ public class BaseDatos {
 			return ok;
 		}
 		
-		public static List<Piso> buscoPiso() throws SQLException{
+		public static List<Piso> buscoPiso(String filtro) throws SQLException{
 			List<Piso> pisos = new ArrayList<>();
 			
 			Connection con= getDBConnection();
@@ -107,6 +107,7 @@ public class BaseDatos {
 						+ "		on Pisos.zona = Zonas.id "
 						+ "inner join Estados "
 						+ "		on Pisos.estado = Estados.id where Pisos.estado=1 ";
+			sql+=filtro;
 			ResultSet rs=null;
 			PreparedStatement ps=null;
 			
@@ -139,6 +140,11 @@ public class BaseDatos {
 			con.close();
 			return pisos;
 			
+		}
+		
+		//Si me llaman sin nada, mando al metodo principal sin filtro
+		public static List<Piso> buscoPiso() throws SQLException{
+			return buscoPiso("");
 		}
 			
 		public static Boolean registrarUsuario(Usuario u) throws SQLException, NullPointerException {
