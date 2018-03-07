@@ -40,6 +40,24 @@ public class Piso {
 		this.img_url = img_url;
 	}
 	
+	//Constructor con todo vacio, para el jsp
+	public Piso(boolean vacio) {
+		this.id=-1;
+		this.zona = "1";
+		this.direccion = "";
+		this.banos = 0;
+		this.habitaciones = 0;
+		this.permite_mascotas = false;
+		this.aire_acondicionado = false;
+		this.amueblado = false;
+		this.piscina = false;
+		this.ascensor = false;
+		this.gimnasio = false;
+		this.precio_venta = 0;
+		this.img_url = "";
+	}
+
+	
 	public Piso() {
 	}
 	

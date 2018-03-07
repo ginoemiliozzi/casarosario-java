@@ -58,7 +58,7 @@ public class Section extends HttpServlet {
 					request.setAttribute("pisos", BaseDatos.buscoPiso(filtro));
 					error = false;
 					
-				} catch (SQLException e1) {
+				} catch (SQLException | NullPointerException e1) {
 					
 					request.setAttribute("secError", "1");
 					error=true;

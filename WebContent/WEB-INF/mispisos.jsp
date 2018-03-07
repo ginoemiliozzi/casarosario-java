@@ -95,14 +95,13 @@
 	    		
 	     %>
 	     	<h1 class="text-center">Mis inmuebles
-			<br>
-     		<form action="ABMPisos" style="margin-top: 7px;">
-				<input type="hidden" name="accion" value="alta">
+			<hr>
+     		<a href="ABM-pisos.jsp" style="margin-top: 7px;">
 				<button class="btn btn-success">Agregar nuevo!</button>					
-			</form>
+			</a>
 	     	</h1>
 		<%if(misPisos.isEmpty()){ //No hay inmuebles para mostrar al usuario%>		
-			<p>Actualmente no tiene cargado ningún inmueble.</p>
+			<p>Actualmente no tiene cargado ningun inmueble.</p>
 		
 		<%} else{//Hay inmuebles para mostrar al usuario
 		for(Piso p: misPisos){%>
@@ -140,7 +139,7 @@
 					<%if(editar){%>
 					<form action="ABMPisos">
 					<input type="hidden" name="id" value="<%=p.getId()%>">
-					<input type="hidden" name="accion" value="modif">
+					<input type="hidden" name="accion" value="consulta">
 					<button class="btn btn-primary">Editar inmueble</button>					
 					</form>
 					<%}%>

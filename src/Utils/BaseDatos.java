@@ -74,6 +74,63 @@ public class BaseDatos {
 			con.close();
 			return misPisos;
 		}
+
+		
+		public static Piso getPiso(String id) throws SQLException{
+			Connection con= getDBConnection();
+			String sql = "select Pisos.* "
+						+" from Pisos "
+						+ "where Pisos.id="+id+" ";
+			PreparedStatement ps = con.prepareStatement(sql);			
+			ResultSet rs = ps.executeQuery();	
+			Piso p = null;
+			while(rs.next()){
+				
+			 p = new Piso(rs.getInt("id"),
+					 	  rs.getString("estado"),
+					 	  rs.getString("zona"),
+					 	  rs.getString("direccion"),
+					 	  rs.getString("propietario"),
+					 	  rs.getInt("banios"),
+					 	  rs.getInt("habitaciones"),
+					 	  rs.getBoolean("permite_mascota"),
+					 	  rs.getBoolean("aire_acondicionado"),
+					 	  rs.getBoolean("amueblado"),
+					 	  rs.getBoolean("piscina"),
+					 	  rs.getBoolean("ascensor"),
+					 	  rs.getBoolean("gimnasio"),
+					 	  rs.getFloat("precio_alquiler"),
+					 	  rs.getFloat("precio_venta"),	
+			 			  rs.getString("img_url"));	
+			}
+			
+			rs.close();
+			ps.close();
+			con.close();
+			return p;
+		}
+		
+		public static void updatePiso(String id, String zona, String direccion, int banos, int habitaciones, boolean masc, boolean aire, boolean amuebl, boolean piscina, boolean ascensor, boolean gim, float precio) throws SQLException{
+			Connection con= getDBConnection();
+			String sql = "update Pisos set zona=? ,direccion = ?, banios=?, habitaciones=?,permite_mascota=?,aire_acondicionado=?,amueblado=?,piscina=?,ascensor=?,gimnasio=?,precio_venta=? "
+					+ "where id = "+id; 
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, zona);
+			ps.setString(2, direccion);
+			ps.setInt(3, banos);
+			ps.setInt(4,habitaciones);
+			ps.setBoolean(5, masc);
+			ps.setBoolean(6, aire);
+			ps.setBoolean(7, amuebl);
+			ps.setBoolean(8, piscina);
+			ps.setBoolean(9, ascensor);
+			ps.setBoolean(10, gim);
+			ps.setFloat(11, precio);
+			ps.execute();	
+			
+			ps.close();
+			con.close();
+		}
 		
 		public static boolean cambiaDueno(int id_casa,String usuario) {
 			Connection con  = getDBConnection();
@@ -97,7 +154,7 @@ public class BaseDatos {
 			return ok;
 		}
 		
-		public static List<Piso> buscoPiso(String filtro) throws SQLException{
+		public static List<Piso> buscoPiso(String filtro) throws SQLException, NullPointerException{
 			List<Piso> pisos = new ArrayList<>();
 			
 			Connection con= getDBConnection();
@@ -228,5 +285,69 @@ public class BaseDatos {
 			}
 					
 			return transacciones;
+		}
+
+		/*
+		 * No es necesario
+		 * 
+		public static String generarId() throws SQLException {
+			int id = 0;
+			Connection con = getDBConnection();
+			String sql = "select max(id) from Pisos";
+			PreparedStatement ps = con.prepareStatement(sql);
+			
+			ResultSet rs = ps.executeQuery();			
+			if(rs.next()) {
+				id= rs.getInt(1);
+			}			
+			ps.close();
+			rs.close();
+			con.close();
+			
+			id=id+1;
+			String idS = ""+id;
+			return idS;
+			
+		}
+*/
+		public static void createPiso(String propietario,  String zona, String direccion, int banos, 
+				int habitaciones, boolean masc, boolean aire, boolean amuebl, boolean piscina, boolean ascensor, boolean gim, float precio) throws SQLException {
+			Connection con= getDBConnection(); 
+			String sql = " INSERT INTO Pisos "
+					+ "VALUES(	    ?"
+					+ "	           ,?"
+					+ "	           ,?"
+					+ "	           ,?"
+					+ "	           ,?"
+					+ "	           ,?"
+					+ "	           ,?"
+					+ "	           ,?"
+					+ "	           ,?"
+					+ "	           ,?"
+					+ "			   ,?"
+					+ "	           ,?"
+					+ "	           ,NULL"				//<precio_alquiler, float,>"
+					+ "	           ,?"
+					+ "	           ,NULL)";				//<img_url, varchar(100),>)";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setInt(1, 1);//estado
+			ps.setString(2, direccion);
+			ps.setString(3, zona);
+			ps.setString(4, propietario);
+			ps.setInt(5, banos);
+			ps.setInt(6,habitaciones);
+			ps.setBoolean(7, masc);
+			ps.setBoolean(8, aire);
+			ps.setBoolean(9, amuebl);
+			ps.setBoolean(10, piscina);
+			ps.setBoolean(11, ascensor);
+			ps.setBoolean(12, gim);
+			ps.setFloat(13, precio);
+			System.out.println(ps);
+			ps.execute();	
+			
+			ps.close();
+			con.close();
+			
 		}
 }
