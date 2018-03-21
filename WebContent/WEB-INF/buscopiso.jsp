@@ -43,7 +43,8 @@
 		if (request.getAttribute("errorLogin") != null) {
 		%>
 		<div class="alert alert-danger">Usuario o contraseña incorrectos</div>
-		<%}	%>
+		<%}	%>		
+		
 
 		<form action="Login?sec=1" method="post">
 			Usuario <input type="text" name="user"> Contraseña <input
@@ -54,13 +55,19 @@
 
 		<%} else {
 				userLogueado = true; //Esta logeado un usuario %>
-
+			
 		<h5>
 			Bienvenido
 			<%=request.getSession().getAttribute("currentUser")%>
 		</h5>
 		<a href="Logout" class="btn btn-danger">Cerrar sesión</a>
-		<%}	%>
+		<%}	
+			if (request.getAttribute("userNotificado") != null) {
+				System.out.println(request.getAttribute("userNotificado"));
+			%>
+			<div class="alert alert-success">Se envió la notificación al usuario propietario!</div>
+			<%}	%>
+
 	</nav>
 	<h1>Busco piso</h1>
 	<form action="Section">

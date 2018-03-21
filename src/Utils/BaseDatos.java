@@ -287,29 +287,7 @@ public class BaseDatos {
 			return transacciones;
 		}
 
-		/*
-		 * No es necesario
-		 * 
-		public static String generarId() throws SQLException {
-			int id = 0;
-			Connection con = getDBConnection();
-			String sql = "select max(id) from Pisos";
-			PreparedStatement ps = con.prepareStatement(sql);
-			
-			ResultSet rs = ps.executeQuery();			
-			if(rs.next()) {
-				id= rs.getInt(1);
-			}			
-			ps.close();
-			rs.close();
-			con.close();
-			
-			id=id+1;
-			String idS = ""+id;
-			return idS;
-			
-		}
-*/
+
 		public static void createPiso(String propietario,  String zona, String direccion, int banos, 
 				int habitaciones, boolean masc, boolean aire, boolean amuebl, boolean piscina, boolean ascensor, boolean gim, float precio) throws SQLException {
 			Connection con= getDBConnection(); 
@@ -349,5 +327,44 @@ public class BaseDatos {
 			ps.close();
 			con.close();
 			
+		}
+
+		public static Boolean notificar(String emisor, int inmueble, String string) throws SQLException {
+			
+			String sql;
+			Connection conn = getDBConnection();
+			ResultSet rs;
+			PreparedStatement ps;
+			
+			String receptor=null;
+			
+			 sql = "SELECT * FROM dbo.Usuarios  " + 
+					"INNER JOIN dbo.Pisos ON Pisos.propietario = Usuarios.usuario " + 
+					"WHERE dbo.Pisos.id="+inmueble;
+			ps=conn.prepareStatement(sql);
+			rs =  ps.executeQuery();
+			if(rs.next())
+				receptor=rs.getString("usuario");
+			
+			
+				sql="INSERT INTO dbo.Transacciones " + 
+					"( " + 
+					"    emisor, " + 
+					"    receptor, " + 
+					"    fecha, " + 
+					"    inmueble, " + 
+					"    operacion " + 
+					") " + 
+					"VALUES " + 
+					"(   '"+emisor+"',         " + 
+					"    '"+receptor+"',       " + 
+					"    GETDATE(), " +
+					"    "+inmueble+",        " + 
+					"    'COM'        " + 
+					"    )";
+				
+			ps = conn.prepareStatement(sql);
+			ps.execute();
+			return true;
 		}
 }

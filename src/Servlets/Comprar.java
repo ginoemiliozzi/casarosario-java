@@ -1,6 +1,8 @@
 package Servlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -27,13 +29,26 @@ public class Comprar extends HttpServlet {
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int id = Integer.parseInt(request.getParameter("id"));
-		String usuario = request.getParameter("usuario");
+		int inmueble = Integer.parseInt(request.getParameter("id"));
+		String emisor = request.getParameter("usuario");
+		Boolean error;
 		
-		if(BaseDatos.cambiaDueno(id, usuario)){
-			//todo ok
+		try {
+			BaseDatos.notificar(emisor,inmueble,"COM");
+			error=false;
+		} catch (SQLException | NullPointerException e) {
+			
+			request.setAttribute("secError", 1);
+			error=true;
+			e.printStackTrace();
+			
+		}
+		
+		if(!error) {
+				request.getRequestDispatcher("Section?sec=1&userNotificado=1").forward(request, response);
 		}else {
-			//error
+
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
 	
 	}
