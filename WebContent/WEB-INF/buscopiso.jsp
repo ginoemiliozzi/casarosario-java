@@ -156,7 +156,7 @@ class="w3-button">Ver Detalles</button>
 					
 				
 					<!-- End Modal -->
-					<form action="Comprar" method="post">
+					<form action="Notificaciones" method="post">
 						<input type="hidden" name="id" value="<%=p.getId()%>"> 
 						<input	type="hidden" name="usuario"
 							value="<%=request.getSession().getAttribute("currentUser")%>">

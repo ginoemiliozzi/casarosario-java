@@ -132,26 +132,20 @@ public class BaseDatos {
 			con.close();
 		}
 		
-		public static boolean cambiaDueno(int id_casa,String usuario) {
+		public static void cambiaDueno(int id_casa,String usuario) throws SQLException {
 			Connection con  = getDBConnection();
 			boolean ok;
 			String sql = "UPDATE Pisos SET Pisos.propietario = ? where Pisos.id = ?";
 			PreparedStatement ps=null;
-			try {
+			
 				ps = con.prepareStatement(sql);
 				ps.setString(1, usuario);
 				ps.setInt(2, id_casa);
 				ps.executeUpdate();
-				ok=true;
-			} catch (SQLException e) {
-				e.printStackTrace();
-				ok= false;
-			}
-			finally {
-				if(ps!=null)try {ps.close();} catch (SQLException e) {e.printStackTrace();}
-				if(con!=null)try {con.close();} catch (SQLException e) {e.printStackTrace();}
-			}
-			return ok;
+				ps.close();
+				con.close();
+			
+			
 		}
 		
 		public static List<Piso> buscoPiso(String filtro) throws SQLException, NullPointerException{
@@ -366,5 +360,25 @@ public class BaseDatos {
 			ps = conn.prepareStatement(sql);
 			ps.execute();
 			return true;
+		}
+
+		public static void borraNotificacion(String transaccion,String inmueble,Boolean aceptada) throws SQLException {
+			
+			Connection conn = getDBConnection();
+			String sql;
+			PreparedStatement ps;
+			
+			if(aceptada) {
+				sql="DELETE FROM Transacciones where inmueble="+inmueble;
+			}else {
+				sql="DELETE FROM Transacciones where id="+transaccion;
+			}
+			
+			conn = getDBConnection();
+			ps= conn.prepareStatement(sql);
+			ps.execute();
+			ps.close();
+			conn.close();
+			
 		}
 }

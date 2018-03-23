@@ -11,46 +11,60 @@ import javax.servlet.http.HttpServletResponse;
 
 import Utils.BaseDatos;
 
-/**
- * Servlet implementation class Comprar
- */
+
 @WebServlet("/Comprar")
 public class Comprar extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+       
 
     public Comprar() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doPost(request,response);
+		doPost(request, response);
 	}
 
+
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int inmueble = Integer.parseInt(request.getParameter("id"));
-		String emisor = request.getParameter("usuario");
+		
+		String inmueble = request.getParameter("inmueble");
+		String transaccion = request.getParameter("transaccion");
+		String emisor = request.getParameter("emisor");
+		String aceptar = request.getParameter("aceptar");
+		String rechazar = request.getParameter("rechazar");
 		Boolean error;
 		
+		
 		try {
-			BaseDatos.notificar(emisor,inmueble,"COM");
-			error=false;
-		} catch (SQLException | NullPointerException e) {
+			if(aceptar!=null) {
+				
+					BaseDatos.cambiaDueno(Integer.valueOf(inmueble),emisor );
+					BaseDatos.borraNotificacion(transaccion,inmueble,true);
+					error=false;
+			}else {
+				BaseDatos.borraNotificacion(transaccion,inmueble,false);
+				error=false;
+			}
 			
-			request.setAttribute("secError", 1);
+			
+			
+		}catch (NumberFormatException | SQLException e) {
+			request.setAttribute("secError", 3);
 			error=true;
 			e.printStackTrace();
+		} 
 			
-		}
-		
+				
 		if(!error) {
-				request.getRequestDispatcher("Section?sec=1&userNotificado=1").forward(request, response);
+				request.getRequestDispatcher("Section?sec=3").forward(request, response);
 		}else {
 
 			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
-	
+		
+		
 	}
 
 }
