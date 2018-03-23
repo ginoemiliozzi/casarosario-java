@@ -51,9 +51,10 @@
 	<% } else { userLogueado =true; //Esta logeado un usuario%>
 
 	<h5>Bienvenido <%=request.getSession().getAttribute("currentUser")%>  </h5>
-	<%if(request.getSession().getAttribute("misnotif")!=null){
-		ArrayList<Transaccion> misnotif = (ArrayList<Transaccion>)request.getSession().getAttribute("misnotif"); 
-		%><h5><%=misnotif.size() %></h5><%} %>
+	<%if(request.getAttribute("misnotif")!=null){
+		ArrayList<Transaccion> misnotif = (ArrayList<Transaccion>)request.getAttribute("misnotif"); 
+		%><a href="Section?sec=3"><h5><%=misnotif.size() %></h5></a><%} %>
+		
 	<a href="Logout" class="btn btn-danger">Cerrar sesión</a>
 	<% }%>
       </div>

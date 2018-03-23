@@ -48,7 +48,7 @@ public class Login extends HttpServlet {
 				
 				ArrayList<Transaccion> misnotif = BaseDatos.verNotificaciones(user);				
 				if(!misnotif.isEmpty()) {
-					request.getSession().setAttribute("misnotif", misnotif);
+					request.setAttribute("misnotif", misnotif);
 				}
 				
 			}else{

@@ -56,6 +56,8 @@ public class Section extends HttpServlet {
 						}
 					}
 					request.setAttribute("pisos", BaseDatos.buscoPiso(filtro));
+					String a = request.getParameter("userNotificado");
+					request.setAttribute("userNotificado", request.getParameter("userNotificado"));
 					error = false;
 					
 				} catch (SQLException | NullPointerException e1) {
@@ -74,7 +76,7 @@ public class Section extends HttpServlet {
 				
 				
 			case 2: 			
-			//SECCION ALQUILA O VENDE
+			//SECCION VENDE
 			try {
 				request.setAttribute("mispisos", BaseDatos.traeMisPisos((String)request.getSession().getAttribute("currentUser")));
 				error = false;
@@ -93,7 +95,26 @@ public class Section extends HttpServlet {
 			}
 				break;
 		
-		
+			case 3: 
+				//SECCION NOTIFICACIONES
+				try {
+					request.setAttribute("misnotif", BaseDatos.verNotificaciones((String)request.getSession().getAttribute("currentUser")));
+					error = false;
+					
+				} catch (SQLException e) {	
+					
+					request.setAttribute("secError", "3");
+					error=true;
+					request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+					e.printStackTrace(); 
+				}
+				
+				//Si se obtuvieron los datos sin ningun error se redirige al jsp solicitado
+				if(!error) {
+					request.getRequestDispatcher("WEB-INF/misnotif.jsp").forward(request, response);	
+				}
+					break;
+				
 			case 100:
 				response.sendRedirect("registro.jsp");			
 				break;
