@@ -8,10 +8,25 @@ public class Usuario {
 	String apellido;
 	String dni;
 	String telefono;
-	
+	Boolean admin;
+	Boolean inhabilitado;
 	
 	public Usuario() {}
 	
+	
+	public Usuario(String username, String password, String nombre, String apellido, String dni, String telefono,
+			Boolean admin, Boolean inhabilitado) {
+		this.username = username;
+		this.password = password;
+		this.nombre = nombre;
+		this.apellido = apellido;
+		this.dni = dni;
+		this.telefono = telefono;
+		this.admin = admin;
+		this.inhabilitado = inhabilitado;
+	}
+
+
 	public Usuario(String username, String password, String nombre, String apellido, String dni, String telefono) {
 		super();
 		this.username = username;
@@ -58,5 +73,26 @@ public class Usuario {
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
+
+
+	public Boolean getAdmin() {
+		return admin;
+	}
+
+
+	public void setAdmin(Boolean admin) {
+		this.admin = admin;
+	}
+
+
+	public Boolean getInhabilitado() {
+		return inhabilitado;
+	}
+
+
+	public void setInhabilitado(Boolean inhabilitado) {
+		this.inhabilitado = inhabilitado;
+	}
+	
 	
 }

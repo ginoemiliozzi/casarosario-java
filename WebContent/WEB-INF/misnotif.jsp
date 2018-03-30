@@ -58,7 +58,7 @@
 		<div id="page-content-wrapper">
 			<div class="container-fluid">
 				<a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Menú</a>
-				<% ArrayList<Transaccion> misnotif = (ArrayList<Transaccion>)request.getAttribute("misnotif");  %>
+				<% ArrayList<Transaccion> misnotif = (ArrayList<Transaccion>)request.getSession().getAttribute("misnotif");  %>
 
 				
 					<%for(Transaccion t : misnotif){ %>

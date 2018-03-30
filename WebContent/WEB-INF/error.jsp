@@ -34,7 +34,7 @@
 
 		if (request.getAttribute("errorLogin") != null) {
 		%>
-		<div class="alert alert-danger">Usuario o contraseña incorrectos</div>
+		<div class="alert alert-danger"><%=request.getAttribute("errorLogin")%></div>
 		<%}	%>
 
 		<form action="Login?sec=<%= request.getAttribute("secError") %>" method="post">

@@ -33,7 +33,7 @@ public class Section extends HttpServlet {
 		
 		//Por si viene desde login
 		if(request.getAttribute("errorLogin")!=null) {
-			request.setAttribute("errorLogin", true);
+			request.setAttribute("errorLogin", request.getAttribute("errorLogin"));
 		}
 		
 		switch(sec){
@@ -45,7 +45,7 @@ public class Section extends HttpServlet {
 			case 1: 
 			//SECCION BUSCO PISO
 				try {
-					String filtro="";
+					String filtro=" AND NOT propietario='"+request.getSession().getAttribute("currentUser")+"' ";	//No mostrar mis inmuebles
 					if(request.getParameter("min")!=null || request.getParameter("max")!=null) {
 						//Agrego AND porque el WHERE ya esta escrito donde filtro que los pisos esten libres
 						if(!request.getParameter("min").equals("")) {
@@ -98,7 +98,7 @@ public class Section extends HttpServlet {
 			case 3: 
 				//SECCION NOTIFICACIONES
 				try {
-					request.setAttribute("misnotif", BaseDatos.verNotificaciones((String)request.getSession().getAttribute("currentUser")));
+					request.getSession().setAttribute("misnotif", BaseDatos.verNotificaciones((String)request.getSession().getAttribute("currentUser")));
 					error = false;
 					
 				} catch (SQLException e) {	

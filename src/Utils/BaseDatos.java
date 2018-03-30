@@ -20,14 +20,18 @@ public class BaseDatos {
 		private static final String DB_PASSWORD = "123456";
 		
 		
-		public static boolean validaLogueo(String user, String password) throws SQLException{
+		public static boolean validaLogueo(String user, String password) throws SQLException, InhabilitadoException{
 			
 			Connection con = getDBConnection();
 			String sql = "select * from Usuarios where usuario='"+user+"' and password='"+password+"'";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ResultSet rs = ps.executeQuery();
 			if(rs.next()){
-				return true;
+				if(rs.getInt("inhabilitado")==1) {
+					throw new InhabilitadoException();
+				}else {
+					return true;					
+				}
 			}
 			rs.close();
 			ps.close();
@@ -73,6 +77,24 @@ public class BaseDatos {
 			ps.close();
 			con.close();
 			return misPisos;
+		}
+		
+		public static List<Usuario> getUsuarios() throws SQLException{
+			List<Usuario> usuarios = new ArrayList<Usuario>();
+			Connection con= getDBConnection();
+			String sql = "select * from Usuarios";
+			PreparedStatement ps = con.prepareStatement(sql);			
+			ResultSet rs = ps.executeQuery();	
+			Usuario u;
+			while(rs.next()){
+				u = new Usuario(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getBoolean(7),rs.getBoolean(8));
+				usuarios.add(u);
+			}
+			
+			rs.close();
+			ps.close();
+			con.close();
+			return usuarios;
 		}
 
 		
@@ -221,7 +243,8 @@ public class BaseDatos {
 					+"								,'"+u.getNombre()+"'"
 					+"								,'"+u.getApellido()+"'"
 					+"								,'"+u.getDni()+"'"
-					+"								,'"+u.getTelefono()+"')";
+					+"								,'"+u.getTelefono()+"'"
+					+"								,'0','0')";
 			
 			ps = con.prepareStatement(sql);
 			
@@ -369,7 +392,7 @@ public class BaseDatos {
 			PreparedStatement ps;
 			
 			if(aceptada) {
-				sql="DELETE FROM Transacciones where inmueble="+inmueble;
+				sql="DELETE FROM Transacciones where inmueble="+inmueble;	//borro todas las transacciones para ese inmueble
 			}else {
 				sql="DELETE FROM Transacciones where id="+transaccion;
 			}
@@ -380,5 +403,39 @@ public class BaseDatos {
 			ps.close();
 			conn.close();
 			
+		}
+
+		public static boolean verAdmin(String user) throws SQLException {			
+			Connection con = getDBConnection();
+			String sql = "select * from Usuarios where usuario=? and admin='1'";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, user);
+			ResultSet rs = ps.executeQuery();
+			if(rs.next()){
+					return true;					
+				}
+			rs.close();
+			ps.close();
+			con.close();
+			return false;
+		}
+
+		public static void habilitarUsuario(String usuario) throws SQLException {
+			Connection con = getDBConnection();
+			String sql = "update Usuarios set inhabilitado=0 where usuario=? ";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, usuario);
+			ps.execute();
+			ps.close();
+			con.close();
+		}
+		public static void inhabilitarUsuario(String usuario) throws SQLException {
+			Connection con = getDBConnection();
+			String sql = "update Usuarios set inhabilitado=1 where usuario=? ";
+			PreparedStatement ps = con.prepareStatement(sql);
+			ps.setString(1, usuario);
+			ps.execute();
+			ps.close();
+			con.close();
 		}
 }

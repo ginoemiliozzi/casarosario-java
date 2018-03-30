@@ -33,7 +33,7 @@
 	 
 	 if(request.getAttribute("errorLogin")!=null){
 		%>
-		<div class="alert alert-danger">Usuario o contraseña incorrectos</div>
+		<div class="alert alert-danger"><%=request.getAttribute("errorLogin")%></div>
 	<%}%>
 	
 	<%if(request.getAttribute("userRegistrado")!=null){
@@ -51,9 +51,9 @@
 	<% } else { userLogueado =true; //Esta logeado un usuario%>
 
 	<h5>Bienvenido <%=request.getSession().getAttribute("currentUser")%>  </h5>
-	<%if(request.getAttribute("misnotif")!=null){
-		ArrayList<Transaccion> misnotif = (ArrayList<Transaccion>)request.getAttribute("misnotif"); 
-		%><a href="Section?sec=3"><h5><%=misnotif.size() %></h5></a><%} %>
+	<%if(request.getSession().getAttribute("misnotif")!=null){
+		ArrayList<Transaccion> misnotif = (ArrayList<Transaccion>)request.getSession().getAttribute("misnotif"); 
+		%><a href="Section?sec=3"><h5><%=misnotif.size() %> Notificaciones</h5></a><%} %>
 		
 	<a href="Logout" class="btn btn-danger">Cerrar sesión</a>
 	<% }%>
@@ -77,6 +77,15 @@
     <!-- Icons Grid -->
     <section class="features-icons bg-light text-center">
       <div class="container">
+      <% if(request.getSession().getAttribute("admin")!=null){
+    		if((boolean)request.getSession().getAttribute("admin")){
+    			%>
+    			<a href=PanelAdmin><h2>Panel de admin</h2></a>
+    			<% 
+    		}
+    	  
+      } %>
+      
         <div class="row">
           <div class="col-lg-6">
             <div class="features-icons-item mx-auto mb-5 mb-lg-0 mb-lg-3">

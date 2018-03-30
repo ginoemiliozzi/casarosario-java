@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@page import="Entidades.Piso"%>
+<%@page import="Entidades.*"%>
 <%@page import="java.util.ArrayList"%>
 
 
@@ -42,7 +42,7 @@
 
 		if (request.getAttribute("errorLogin") != null) {
 		%>
-		<div class="alert alert-danger">Usuario o contraseña incorrectos</div>
+		<div class="alert alert-danger"><%=request.getAttribute("errorLogin")%></div>
 		<%}	%>		
 		
 
@@ -60,6 +60,10 @@
 			Bienvenido
 			<%=request.getSession().getAttribute("currentUser")%>
 		</h5>
+		<%if(request.getSession().getAttribute("misnotif")!=null){
+		ArrayList<Transaccion> misnotif = (ArrayList<Transaccion>)request.getSession().getAttribute("misnotif"); 
+		%><a href="Section?sec=3"><h5><%=misnotif.size() %> Notificaciones</h5></a><%} %>
+		
 		<a href="Logout" class="btn btn-danger">Cerrar sesión</a>
 		<%}	
 			if (request.getAttribute("userNotificado") != null) {

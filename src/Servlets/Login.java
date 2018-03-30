@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import Entidades.Transaccion;
 import Utils.BaseDatos;
 import Utils.Encryptor;
+import Utils.InhabilitadoException;
 
 
 @WebServlet("/Login")
@@ -48,13 +49,26 @@ public class Login extends HttpServlet {
 				
 				ArrayList<Transaccion> misnotif = BaseDatos.verNotificaciones(user);				
 				if(!misnotif.isEmpty()) {
-					request.setAttribute("misnotif", misnotif);
+					request.getSession().setAttribute("misnotif", misnotif);
 				}
-				
+				boolean admin = BaseDatos.verAdmin(user);
+				request.getSession().setAttribute("admin", admin);
 			}else{
-				request.setAttribute("errorLogin", true);
+				request.setAttribute("errorLogin", "Usuario o contrasena incorrectos");
 			}
 			
+			
+		} catch (SQLException e) {			
+			e.printStackTrace();
+			request.setAttribute("secError", "0");
+			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
+			
+		} catch (InhabilitadoException e) {
+			request.setAttribute("errorLogin", "Usuario inhabilitado");
+			e.printStackTrace();
+			
+		}finally {
+
 			if(request.getParameter("sec")!=null){
 				
 				request.getRequestDispatcher("Section?sec="+request.getParameter("sec")).forward(request, response);;
@@ -64,13 +78,6 @@ public class Login extends HttpServlet {
 				
 			}
 			
-			
-			
-		} catch (SQLException e) {
-			
-			e.printStackTrace();
-			request.setAttribute("secError", "0");
-			request.getRequestDispatcher("WEB-INF/error.jsp").forward(request, response);
 		}
 		
 	}

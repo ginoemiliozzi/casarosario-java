@@ -36,7 +36,7 @@
 	 
 	 if(request.getAttribute("errorLogin")!=null){
 		%>
-		<div class="alert alert-danger">Usuario o contrasena incorrectos</div>
+		<div class="alert alert-danger"><%=request.getAttribute("errorLogin")%></div>
 	<%}%>
 	
 	<form action="Login?sec=0" method="post">

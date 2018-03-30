@@ -1,5 +1,5 @@
 <%@page import="java.sql.SQLException"%>
-<%@page import="Entidades.Piso"%>
+<%@page import="Entidades.*"%>
 <%@page import="Utils.BaseDatos"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
@@ -37,7 +37,7 @@
 	 
 	 if(request.getAttribute("errorLogin")!=null){
 		%>
-		<div class="alert alert-danger">Usuario o contrasena incorrectos</div>
+		<div class="alert alert-danger"><%=request.getAttribute("errorLogin")%></div>
 	<%}%>
 	
 	<form action="Login?sec=2" method="post">
@@ -49,6 +49,10 @@
 	<% } else { userLogueado =true; //Esta logeado un usuario%>
 
 	<h5>Bienvenido <%=request.getSession().getAttribute("currentUser")%> </h5>
+	<%if(request.getSession().getAttribute("misnotif")!=null){
+		ArrayList<Transaccion> misnotif = (ArrayList<Transaccion>)request.getSession().getAttribute("misnotif"); 
+		%><a href="Section?sec=3"><h5><%=misnotif.size() %> Notificaciones</h5></a><%} %>
+		
 	<a href="Logout" class="btn btn-danger">Cerrar sesión</a>
 	<% }%>
       </div>      
