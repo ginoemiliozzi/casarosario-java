@@ -71,7 +71,7 @@
 					<span>Informacion del inmueble</span>
 				</h1>
 				<hr>
-				<form class="form-horizontal" method="post" action="ABMPisos">
+				<form class="form-horizontal" method="post" action="ABMPisos" enctype="multipart/form-data">
 				<input type="hidden" name="id" value="<%=p.getId()%>">
 
 	<%	 if(request.getSession().getAttribute("currentUser")!=null){						//Hay nigun usuario logeado %>
@@ -233,6 +233,13 @@
 								<i class="glyphicon glyphicon-envelope"></i></span>
 								<input type="number" class="form-control" name="precio_venta" id="precio_venta" value="<%=p.getPrecio_venta()%>">
 							</div>
+							
+							<label class="control-label" for="precio_venta">Foto<span class="text-danger"></span>
+							</label>
+							<div class="input-group">
+								<input type="file" name="img_url">
+							</div>
+							
 						</div>
 					</div>
 

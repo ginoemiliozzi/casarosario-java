@@ -1,13 +1,19 @@
 package Servlets;
 
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Part;
 
 import Entidades.Piso;
 import Utils.BaseDatos;
@@ -16,6 +22,7 @@ import Utils.BaseDatos;
  * Servlet implementation class ABMPisos
  */
 @WebServlet("/ABMPisos")
+@MultipartConfig
 public class ABMPisos extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -80,6 +87,28 @@ public class ABMPisos extends HttpServlet {
 				if(request.getParameter("gimnasio")!=null) {
 					gimnasio=true;
 				}
+				
+				String fileName = null;
+				if(request.getPart("img_url").getSize() != 0) {
+					//recupera foto
+				    Part filePart = request.getPart("img_url"); // Retrieves <input type="file" name="file">
+				    fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
+				    InputStream fileContent = filePart.getInputStream();
+				    
+				 // escribe el inputStream a FileOutputStream
+				    String realPath = getServletContext().getRealPath("/");
+				    FileOutputStream outputStream = new FileOutputStream(new File(realPath+"/img/deptos",fileName));
+
+					int read = 0;
+					byte[] bytes = new byte[1024];
+
+					while ((read = fileContent.read(bytes)) != -1) {
+						outputStream.write(bytes, 0, read);
+					}
+
+					System.out.println("Imagen cargada");
+				}
+				
 				BaseDatos.updatePiso(id,request.getParameter("zona"),request.getParameter("direccion"),Integer.parseInt(request.getParameter("banos")),Integer.parseInt(request.getParameter("habitaciones")),
 						permite_mascotas,
 						amueblado,
@@ -87,7 +116,8 @@ public class ABMPisos extends HttpServlet {
 						piscina,
 						ascensor,
 						gimnasio,
-						Float.parseFloat(request.getParameter("precio_venta")));
+						Float.parseFloat(request.getParameter("precio_venta")),
+						fileName);
 			} catch (NumberFormatException|SQLException e) {
 				request.setAttribute("secError", "2");
 				error=true;
@@ -130,6 +160,29 @@ public class ABMPisos extends HttpServlet {
 				if(request.getParameter("gimnasio")!=null) {
 					gimnasio=true;
 				}
+				
+				//recupera foto
+			    Part filePart = request.getPart("img_url"); // Retrieves <input type="file" name="file">
+			    String fileName="";
+			    
+				if(filePart.getSize() != 0) {
+					fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString(); // MSIE fix.
+					InputStream fileContent = filePart.getInputStream();
+					
+					// escribe el inputStream a FileOutputStream
+					String realPath = getServletContext().getRealPath("/");
+					FileOutputStream outputStream = new FileOutputStream(new File(realPath+"/img/deptos",fileName));
+					
+					int read = 0;
+					byte[] bytes = new byte[1024];
+					
+					while ((read = fileContent.read(bytes)) != -1) {
+						outputStream.write(bytes, 0, read);
+					}
+					
+					System.out.println("Imagen cargada");					
+				}
+				
 				BaseDatos.createPiso(propietario,request.getParameter("zona"),request.getParameter("direccion"),Integer.parseInt(request.getParameter("banos")),Integer.parseInt(request.getParameter("habitaciones")),
 						permite_mascotas,
 						amueblado,
@@ -137,7 +190,8 @@ public class ABMPisos extends HttpServlet {
 						piscina,
 						ascensor,
 						gimnasio,
-						Float.parseFloat(request.getParameter("precio_venta")));
+						Float.parseFloat(request.getParameter("precio_venta")),
+						fileName);
 			} catch (NumberFormatException|SQLException e) {
 				request.setAttribute("secError", "2");
 				error=true;

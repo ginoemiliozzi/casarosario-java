@@ -132,7 +132,7 @@ public class BaseDatos {
 			return p;
 		}
 		
-		public static void updatePiso(String id, String zona, String direccion, int banos, int habitaciones, boolean masc, boolean aire, boolean amuebl, boolean piscina, boolean ascensor, boolean gim, float precio) throws SQLException{
+		public static void updatePiso(String id, String zona, String direccion, int banos, int habitaciones, boolean masc, boolean aire, boolean amuebl, boolean piscina, boolean ascensor, boolean gim, float precio, String img_url) throws SQLException{
 			Connection con= getDBConnection();
 			String sql = "update Pisos set zona=? ,direccion = ?, banios=?, habitaciones=?,permite_mascota=?,aire_acondicionado=?,amueblado=?,piscina=?,ascensor=?,gimnasio=?,precio_venta=? "
 					+ "where id = "+id; 
@@ -149,6 +149,12 @@ public class BaseDatos {
 			ps.setBoolean(10, gim);
 			ps.setFloat(11, precio);
 			ps.execute();	
+			
+			if(img_url!=null) {
+				sql="update Pisos set img_url='"+img_url+"' where id= "+id;
+				ps = con.prepareStatement(sql);
+				ps.execute();
+			}
 			
 			ps.close();
 			con.close();
@@ -306,7 +312,7 @@ public class BaseDatos {
 
 
 		public static void createPiso(String propietario,  String zona, String direccion, int banos, 
-				int habitaciones, boolean masc, boolean aire, boolean amuebl, boolean piscina, boolean ascensor, boolean gim, float precio) throws SQLException {
+				int habitaciones, boolean masc, boolean aire, boolean amuebl, boolean piscina, boolean ascensor, boolean gim, float precio, String img_url) throws SQLException {
 			Connection con= getDBConnection(); 
 			String sql = " INSERT INTO Pisos "
 					+ "VALUES(	    ?"
@@ -323,7 +329,7 @@ public class BaseDatos {
 					+ "	           ,?"
 					+ "	           ,NULL"				//<precio_alquiler, float,>"
 					+ "	           ,?"
-					+ "	           ,NULL)";				//<img_url, varchar(100),>)";
+					+ "	           ,?)";				//<img_url, varchar(100),>)";
 			PreparedStatement ps = con.prepareStatement(sql);
 			ps.setInt(1, 1);//estado
 			ps.setString(2, direccion);
@@ -338,6 +344,7 @@ public class BaseDatos {
 			ps.setBoolean(11, ascensor);
 			ps.setBoolean(12, gim);
 			ps.setFloat(13, precio);
+			ps.setString(14, img_url);
 			System.out.println(ps);
 			ps.execute();	
 			
